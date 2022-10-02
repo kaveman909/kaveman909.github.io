@@ -15,18 +15,19 @@ var num_of_values = clock_values
 var bridge_card_ratio = (3.5 / 2.25);
 
 var box_colors = [
-  'rgb(237, 0, 39)',
-  'rgb(219, 25, 40)',
-  'rgb(201, 36, 41)',
-  'rgb(184, 42, 42)',
-  'rgb(166, 46, 42)',
-  'rgb(149, 49, 43)',
-  'rgb(132, 50, 43)',
-  'rgb(115, 51, 44)',
-  'rgb(98, 50, 44)',
-  'rgb(81, 49, 45)',
-  'rgb(64, 47, 45)',
-  'rgb(45, 45, 45)',];
+  'rgb(38, 158, 70)',
+  'rgb(39, 135, 203)',
+  'rgb(47, 126, 187)',
+  'rgb(51, 117, 172)',
+  'rgb(54, 109, 156)',
+  'rgb(56, 100, 141)',
+  'rgb(57, 92, 127)',
+  'rgb(57, 84, 112)',
+  'rgb(56, 76, 98)',
+  'rgb(54, 68, 84)',
+  'rgb(52, 60, 71)',
+  'rgb(166, 35, 35)',
+];
 
 var two = new Two(params).appendTo(elem);
 var ver_height = two.height * rect_height_prop;
@@ -42,7 +43,7 @@ var styles = {
 var styles_flavor = {
   alignment: 'left',
   baseline: 'middle',
-  size: text_size * 0.65,
+  size: text_size * 0.60,
   family: 'Avenir Next',
   fill: 'rgba(255, 255, 255, 1)',
   style: 'italic'
