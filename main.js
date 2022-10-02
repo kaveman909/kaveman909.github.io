@@ -15,7 +15,7 @@ var num_of_values = clock_values
 var bridge_card_ratio = (3.5 / 2.25);
 
 var box_colors = [
-  'rgb(38, 158, 70)',
+  'rgb(207, 181, 59)',
   'rgb(39, 135, 203)',
   'rgb(47, 126, 187)',
   'rgb(51, 117, 172)',
@@ -24,9 +24,24 @@ var box_colors = [
   'rgb(57, 92, 127)',
   'rgb(57, 84, 112)',
   'rgb(56, 76, 98)',
-  'rgb(54, 68, 84)',
-  'rgb(52, 60, 71)',
-  'rgb(166, 35, 35)',
+  'rgb(51, 65, 83)',
+  'rgb(49, 57, 68)',
+  'rgb(35, 35, 35)',
+];
+
+var text_colors = [
+  'rgba(0, 0, 0, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
+  'rgba(255, 255, 255, ',
 ];
 
 var two = new Two(params).appendTo(elem);
@@ -66,7 +81,7 @@ for (let i = 0; i < num_of_values; i++) {
 for (let i = 0; i < num_of_values; i++) {
   var y_text_fudge = text_size / 8; // TBD: how to get text height and compensate for real
   var t = two.makeText(((clock_values + 1) - ((i % clock_values) + 1)).toString(), 0, y_offset(i) + y_text_fudge, styles);
-  t.fill = 'rgba(255, 255, 255, ' + (1 - (i/num_of_values) * 0.5).toString() + ')'
+  t.fill = text_colors[i] + (1 - (i/num_of_values) * 0.25).toString() + ')'
   group_array.push(t);
 }
 
