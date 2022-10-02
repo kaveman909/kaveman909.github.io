@@ -9,7 +9,8 @@ var text_spacing = 1
 var rect_height_prop = 1
 var run_size = 3
 var clock_values = 12
-var num_of_values = clock_values + run_size - 1 // 14
+//var num_of_values = clock_values + run_size - 1 // 14
+var num_of_values = clock_values
 // var poker_card_ratio = (3.5 / 2.5);
 var bridge_card_ratio = (3.5 / 2.25);
 
@@ -44,7 +45,7 @@ for (let i = 0; i < num_of_values; i++) {
   if (i < run_size) {
     // top dogs
     fill_color = 'rgba(76, 158, 65, 1';
-  } else if (i >= num_of_values - run_size) {
+  } else if (i >= num_of_values - 1) {
     // worst
     fill_color = 'rgba(138, 62, 72, 1)';
   } else {
@@ -63,53 +64,21 @@ for (let i = 0; i < num_of_values; i++) {
 }
 
 var best_run_str = ''
-for (let i = (run_size - 1); i >= 0; i--) {
-  best_run_str += group_array[i + num_of_values].value;
-  if (i > 0) {
-    best_run_str += '-';
-  }
-}
+update_best()
 
 var best_run = two.makeText('Best Run:', two.width * 0.25, y_offset(0), styles_flavor);
 var best_run2 = two.makeText(best_run_str, two.width * 0.25, y_offset(1), styles_flavor);
 group_array.push(best_run)
 group_array.push(best_run2)
 
+var worst_ind = [1, 0, num_of_values - 1]
 var worst_run_str = ''
-for (let i = (run_size - 1); i >= 0; i--) {
-  worst_run_str += group_array[i + num_of_values + clock_values - 1].value;
-  if (i > 0) {
-    worst_run_str += '-';
-  }
-}
+update_worst()
 
-var worst_run = two.makeText('Worst Run:', two.width * 0.25, y_offset(11), styles_flavor);
-var worst_run2 = two.makeText(worst_run_str, two.width * 0.25, y_offset(12), styles_flavor);
+var worst_run = two.makeText('Worst Run:', two.width * 0.25, y_offset(num_of_values - 2), styles_flavor);
+var worst_run2 = two.makeText(worst_run_str, two.width * 0.25, y_offset(num_of_values - 1), styles_flavor);
 group_array.push(worst_run)
 group_array.push(worst_run2)
-
-
-function update_best_run() {
-  best_run_str = ''
-  for (let i = (run_size - 1); i >= 0; i--) {
-    best_run_str += group_array[i + num_of_values].value;
-    if (i > 0) {
-      best_run_str += '-';
-    }
-  }
-  group_array[num_of_values * 2 + 1].value = best_run_str
-}
-
-function update_worst_run() {
-  worst_run_str = ''
-  for (let i = (run_size - 1); i >= 0; i--) {
-    worst_run_str += group_array[i + num_of_values + clock_values - 1].value;
-    if (i > 0) {
-      worst_run_str += '-';
-    }
-  }
-  group_array[num_of_values * 2 + 3].value = worst_run_str
-}
 
 var cx = two.width * 0.25;
 var cy = two.height * 0.5 + text_size / 2;
@@ -151,4 +120,34 @@ function pointerup(e) {
     update_worst_run()
     two.update();
   }
+}
+
+function update_worst() {
+  worst_run_str = ''
+  for (const i of worst_ind) {
+    worst_run_str += group_array[i + num_of_values].value;
+    if (i <= 1) {
+      worst_run_str += '-';
+    }
+  }
+}
+
+function update_best() {
+  best_run_str = ''
+  for (let i = (run_size - 1); i >= 0; i--) {
+    best_run_str += group_array[i + num_of_values].value;
+    if (i > 0) {
+      best_run_str += '-';
+    }
+  }
+}
+
+function update_best_run() {
+  update_best()
+  group_array[num_of_values * 2 + 1].value = best_run_str
+}
+
+function update_worst_run() {
+  update_worst()
+  group_array[num_of_values * 2 + 3].value = worst_run_str
 }
