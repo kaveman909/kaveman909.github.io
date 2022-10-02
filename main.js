@@ -14,6 +14,20 @@ var num_of_values = clock_values
 // var poker_card_ratio = (3.5 / 2.5);
 var bridge_card_ratio = (3.5 / 2.25);
 
+var box_colors = [
+  'rgb(237, 0, 39)',
+  'rgb(219, 25, 40)',
+  'rgb(201, 36, 41)',
+  'rgb(184, 42, 42)',
+  'rgb(166, 46, 42)',
+  'rgb(149, 49, 43)',
+  'rgb(132, 50, 43)',
+  'rgb(115, 51, 44)',
+  'rgb(98, 50, 44)',
+  'rgb(81, 49, 45)',
+  'rgb(64, 47, 45)',
+  'rgb(45, 45, 45)',];
+
 var two = new Two(params).appendTo(elem);
 var ver_height = two.height * rect_height_prop;
 var text_size = ver_height / num_of_values / text_spacing;
@@ -41,17 +55,8 @@ function y_offset(i) {
 
 for (let i = 0; i < num_of_values; i++) {
   var scaling = .925
-  var fill_color = '';
-  if (i < run_size) {
-    // top dogs
-    fill_color = 'rgba(76, 158, 65, 1';
-  } else if (i >= num_of_values - 1) {
-    // worst
-    fill_color = 'rgba(138, 62, 72, 1)';
-  } else {
-    // middle
-    fill_color = 'rgba(62, 111, 138, 1)';
-  }
+  var fill_color = box_colors[i];
+
   var rect = two.makeRoundedRectangle(0, y_offset(i), text_size * scaling * bridge_card_ratio, text_size * scaling, text_size * scaling * 0.2);
   rect.fill = fill_color;
   group_array.push(rect);
@@ -60,6 +65,7 @@ for (let i = 0; i < num_of_values; i++) {
 for (let i = 0; i < num_of_values; i++) {
   var y_text_fudge = text_size / 8; // TBD: how to get text height and compensate for real
   var t = two.makeText(((clock_values + 1) - ((i % clock_values) + 1)).toString(), 0, y_offset(i) + y_text_fudge, styles);
+  t.fill = 'rgba(255, 255, 255, ' + (1 - (i/num_of_values) * 0.5).toString() + ')'
   group_array.push(t);
 }
 
