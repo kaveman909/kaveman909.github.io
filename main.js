@@ -1,7 +1,8 @@
 import Two from 'https://cdn.skypack.dev/two.js@latest'
 
 var params = {
-  fullscreen: true
+  fullscreen: true,
+  autostart: true,
 };
 var isClicking = false
 var elem = document.body;
@@ -107,6 +108,9 @@ var cy = two.height * 0.5 + text_size / 2;
 var group = two.makeGroup(group_array);
 group.position.set(cx, cy);
 group.scale = 1;
+
+var sprite = two.makeSprite('./dickory.png', two.width * 0.65, two.height * 0.5);
+sprite.scale = 0.40;
 
 window.addEventListener('pointerdown', pointerdown, false);
 window.addEventListener('pointerup', pointerup, false);
