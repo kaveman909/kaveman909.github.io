@@ -6,7 +6,7 @@ var params = {
   autostart: true,
 };
 var two = new Two(params).appendTo(elem);
-var text_size = two.width/8
+const text_size = two.width/8
 
 var styles = {
   alignment: 'center',
@@ -16,7 +16,6 @@ var styles = {
   fill: 'rgba(255, 255, 255, 1)'
 };
 
-// 43
 var winning_msgs = [
   [13, "Perfect score! Can you do it again?"],
   [12, "Incredible! Your friends must be impressed!"],
@@ -26,6 +25,9 @@ var winning_msgs = [
   [4, "That's a good start. Try again!"],
   [0, "Try again, and again, and again."],
 ]
+
+// longest word: 13.  Longest winning message: 43
+const winning_text_size = text_size * 13 / 43; // doesn't really work that well
 
 var styles_left = {...styles}; // deep copy syntax
 styles_left.alignment = 'right';
@@ -126,8 +128,8 @@ function pointerup(e) {
       game_finished = true;
       for (const winning_msg of winning_msgs) {
         if (correct_cnt >= winning_msg[0]) {
-          text.value = winning_msg[1]
-          text.size = correct_list[0].size * 1.3
+          text.value = winning_msg[1];
+          text.size = winning_text_size;
           break;
         }
       }
