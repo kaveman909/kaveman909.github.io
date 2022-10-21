@@ -1,7 +1,11 @@
 import Two from 'https://cdn.skypack.dev/two.js@latest'
 
 
-const dicts = ["/original_and_fanmade.txt", "/top_5000_nouns.txt"];
+const dicts = ["/original_and_fanmade.txt", 
+               "/top_5000_nouns.txt", 
+               "/top-1000-acl-anthology-ref.txt",
+               "/top-1000-ecolexicon.txt",
+              ];
 
 async function downloadFile(f) {
 	let response = await fetch(f);
