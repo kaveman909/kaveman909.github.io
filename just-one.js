@@ -66,7 +66,7 @@ function getRandomInt(max) {
 }
 
 var den = 9;
-var text = two.makeText("TAP TO BEGIN2", two.width / 2, two.height * 2 / den, styles);
+var text = two.makeText("TAP TO BEGIN3", two.width / 2, two.height * 2 / den, styles);
 
 var correct_cnt = 0;
 var pass_cnt = 0;
@@ -137,9 +137,9 @@ function pointerup(e) {
         if (correct_cnt + pass_cnt + wrong_cnt == game_len) {
           // special case; if our last card was wrong, we remove the most recent "Correct"
           // card, so we'll just use "pass" for this as well.
+          correct_cnt--;
           pass_list[pass_cnt].value = correct_list[correct_cnt].value
           pass_cnt++;
-          correct_cnt--;
           correct_list[correct_cnt].value = "";
         } else {
           pass_list[pass_cnt].value = "???"
