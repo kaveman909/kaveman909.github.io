@@ -66,7 +66,7 @@ function getRandomInt(max) {
 }
 
 var den = 9;
-var text = two.makeText("TAP TO BEGIN3", two.width / 2, two.height * 2 / den, styles);
+var text = two.makeText("TAP TO BEGIN4", two.width / 2, two.height * 2 / den, styles);
 
 var correct_cnt = 0;
 var pass_cnt = 0;
@@ -184,6 +184,7 @@ function pointerup(e) {
       }
       words_used.push(new_word)
       allow_game = true;
+      console.log(new_word.length);
     }
   }
   two.update()
