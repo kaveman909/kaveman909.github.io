@@ -51,9 +51,6 @@ var winning_msgs = [
   [0, "Try again, and again, and again."],
 ]
 
-// longest word: 13.  Longest winning message: 43
-const winning_text_size = text_size * 13 / 43; // doesn't really work that well
-
 var styles_left = { ...styles }; // deep copy syntax
 styles_left.alignment = 'right';
 styles_left.size = text_size / 2;
@@ -69,7 +66,7 @@ function getRandomInt(max) {
 }
 
 var den = 9;
-var text = two.makeText("TAP TO BEGIN", two.width / 2, two.height * 2 / den, styles);
+var text = two.makeText("TAP TO BEGIN1", two.width / 2, two.height * 2 / den, styles);
 
 var correct_cnt = 0;
 var pass_cnt = 0;
@@ -159,7 +156,7 @@ function pointerup(e) {
       for (const winning_msg of winning_msgs) {
         if (correct_cnt >= winning_msg[0]) {
           text.value = winning_msg[1];
-          text.size = winning_text_size;
+          text.size = 13.0 * text_size / winning_msg[1].length;
           break;
         }
       }
@@ -175,9 +172,11 @@ function pointerup(e) {
     }
     if (words_used.length === words.length) {
       text.value = "NO MORE WORDS"
+      text.size = text_size;
       allow_game = false
     } else {
       text.value = new_word
+      text.size = 13.0 / new_word.length * text_size;
       words_used.push(new_word)
       allow_game = true;
     }
