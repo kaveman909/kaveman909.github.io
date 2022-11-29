@@ -1,21 +1,21 @@
 import Two from 'https://cdn.skypack.dev/two.js@latest'
 
 
-const dicts = ["/original_and_fanmade.txt", 
-               "/top_5000_nouns.txt", 
-               "/top-1000-acl-anthology-ref.txt",
-               "/top-1000-ecolexicon.txt",
-              ];
+const dicts = ["/original_and_fanmade.txt",
+  "/top_5000_nouns.txt",
+  "/top-1000-acl-anthology-ref.txt",
+  "/top-1000-ecolexicon.txt",
+];
 
 async function downloadFile(f) {
-	let response = await fetch(f);
-		
-	if(response.status != 200) {
-		throw new Error("Server Error");
-	}
-	let text_data = await response.text();
+  let response = await fetch(f);
 
-	return text_data;
+  if (response.status != 200) {
+    throw new Error("Server Error");
+  }
+  let text_data = await response.text();
+
+  return text_data;
 }
 
 let words = [];
@@ -31,7 +31,7 @@ var params = {
   autostart: true,
 };
 var two = new Two(params).appendTo(elem);
-const text_size = two.width/8
+const text_size = two.width / 8
 
 var styles = {
   alignment: 'center',
@@ -54,14 +54,14 @@ var winning_msgs = [
 // longest word: 13.  Longest winning message: 43
 const winning_text_size = text_size * 13 / 43; // doesn't really work that well
 
-var styles_left = {...styles}; // deep copy syntax
+var styles_left = { ...styles }; // deep copy syntax
 styles_left.alignment = 'right';
 styles_left.size = text_size / 2;
 
-var styles_center = {...styles_left};
+var styles_center = { ...styles_left };
 styles_center.alignment = 'center';
 
-var styles_right = {...styles_left};
+var styles_right = { ...styles_left };
 styles_right.alignment = 'left';
 
 function getRandomInt(max) {
@@ -69,26 +69,26 @@ function getRandomInt(max) {
 }
 
 var den = 9;
-var text = two.makeText("TAP TO BEGIN", two.width/2, two.height * 2/den, styles);
+var text = two.makeText("TAP TO BEGIN", two.width / 2, two.height * 2 / den, styles);
 
 var correct_cnt = 0;
 var pass_cnt = 0;
 var wrong_cnt = 0;
 
-var correct_val = two.makeText(correct_cnt.toString(), two.width * 1/4, two.height * 3/den, styles_left);
-var pass_val = two.makeText(pass_cnt.toString(), two.width * 2/4, two.height * 3/den, styles_center);
-var wrong_val = two.makeText(wrong_cnt.toString(), two.width * 3/4, two.height * 3/den, styles_right);
+var correct_val = two.makeText(correct_cnt.toString(), two.width * 1 / 4, two.height * 3 / den, styles_left);
+var pass_val = two.makeText(pass_cnt.toString(), two.width * 2 / 4, two.height * 3 / den, styles_center);
+var wrong_val = two.makeText(wrong_cnt.toString(), two.width * 3 / 4, two.height * 3 / den, styles_right);
 
-two.makeText("Correct", two.width * 1/4, two.height * 4/den, styles_left);
-two.makeText("Pass", two.width * 2/4, two.height * 4/den, styles_center);
-two.makeText("Wrong", two.width * 3/4, two.height * 4/den, styles_right);
+two.makeText("Correct", two.width * 1 / 4, two.height * 4 / den, styles_left);
+two.makeText("Pass", two.width * 2 / 4, two.height * 4 / den, styles_center);
+two.makeText("Wrong", two.width * 3 / 4, two.height * 4 / den, styles_right);
 
 var correct_list = []
 var pass_list = []
 var wrong_list = []
 
 var game_len = 13;
-var list_start = two.height * 4/den;
+var list_start = two.height * 4 / den;
 var list_incr = (two.height - list_start) / (game_len + 1);
 var font_scaling = 0.5
 var word_used = false
@@ -97,12 +97,12 @@ var allow_game = false;
 var game_finished = false;
 
 for (let i = 1; i <= game_len; i++) {
-  correct_list.push(two.makeText("", two.width * 1/4, list_start + i*list_incr, styles_left))
-  correct_list[i-1].size = correct_list[i-1].size*font_scaling
-  pass_list.push(two.makeText("", two.width * 2/4, list_start + i*list_incr, styles_center))
-  pass_list[i-1].size = pass_list[i-1].size*font_scaling
-  wrong_list.push(two.makeText("", two.width * 3/4, list_start + i*list_incr, styles_right))
-  wrong_list[i-1].size = wrong_list[i-1].size*font_scaling
+  correct_list.push(two.makeText("", two.width * 1 / 4, list_start + i * list_incr, styles_left))
+  correct_list[i - 1].size = correct_list[i - 1].size * font_scaling
+  pass_list.push(two.makeText("", two.width * 2 / 4, list_start + i * list_incr, styles_center))
+  pass_list[i - 1].size = pass_list[i - 1].size * font_scaling
+  wrong_list.push(two.makeText("", two.width * 3 / 4, list_start + i * list_incr, styles_right))
+  wrong_list[i - 1].size = wrong_list[i - 1].size * font_scaling
 }
 
 two.update();
@@ -119,14 +119,14 @@ function pointerup(e) {
   }
   var mousex = e.clientX;
   var mousey = e.clientY;
-  if (mousey > two.height * 2.5/den && !word_used && allow_game) {
-    if (mousex < two.width * 1/3) {
+  if (mousey > two.height * 2.5 / den && !word_used && allow_game) {
+    if (mousex < two.width * 1 / 3) {
       if (!correct_list.some(e => e.value === text.value)) {
         correct_list[correct_cnt].value = text.value
         correct_cnt++;
         update_val(correct_val, correct_cnt);
       }
-    } else if (mousex < two.width * 2/3) {
+    } else if (mousex < two.width * 2 / 3) {
       if (!pass_list.some(e => e.value === text.value)) {
         pass_list[pass_cnt].value = text.value
         pass_cnt++;
@@ -164,10 +164,10 @@ function pointerup(e) {
         }
       }
     }
-  } else if (mousey <= two.height * 2.5/den) {
+  } else if (mousey <= two.height * 2.5 / den) {
     word_used = false;
     var new_word = "";
-    while(words_used.length < words.length) {
+    while (words_used.length < words.length) {
       new_word = words[getRandomInt(words.length)]
       if (!words_used.includes(new_word)) {
         break;
