@@ -136,16 +136,25 @@ function pointerup(e) {
       if (!wrong_list.some(e => e.value === text.value)) {
         // special case; we discard a card as well, so we use 'pass' for this
         wrong_list[wrong_cnt].value = text.value
-        pass_list[pass_cnt].value = "???"
         wrong_cnt++;
-        pass_cnt++;
+        if (correct_cnt + pass_cnt + wrong_cnt == game_len) {
+          // special case; if our last card was wrong, we remove the most recent "Correct"
+          // card, so we'll just use "pass" for this as well.
+          pass_list[pass_cnt].value = correct_list[correct_cnt].value
+          pass_cnt++;
+          correct_cnt--;
+          correct_list[correct_cnt].value = "";
+        } else {
+          pass_list[pass_cnt].value = "???"
+          pass_cnt++;
+        }
         update_val(wrong_val, wrong_cnt);
         update_val(pass_val, pass_cnt);
       }
     }
     word_used = true;
     // check if we've finished game
-    if (correct_cnt + pass_cnt + wrong_cnt >= game_len) {
+    if (correct_cnt + pass_cnt + wrong_cnt == game_len) {
       game_finished = true;
       for (const winning_msg of winning_msgs) {
         if (correct_cnt >= winning_msg[0]) {
