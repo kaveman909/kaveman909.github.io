@@ -147,6 +147,7 @@ function pointerup(e) {
         }
         update_val(wrong_val, wrong_cnt);
         update_val(pass_val, pass_cnt);
+        update_val(correct_val, correct_cnt);
       }
     }
     word_used = true;
@@ -175,8 +176,12 @@ function pointerup(e) {
       text.size = text_size;
       allow_game = false
     } else {
-      text.value = new_word
-      text.size = 13.0 / new_word.length * text_size;
+      text.value = new_word;
+      if (new_word.length > 13) {
+        text.size = 13.0 / new_word.length * text_size;
+      } else {
+        text.size = text_size;
+      }
       words_used.push(new_word)
       allow_game = true;
     }
