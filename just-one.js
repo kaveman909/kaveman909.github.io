@@ -66,7 +66,7 @@ function getRandomInt(max) {
 }
 
 var den = 9;
-var text = two.makeText("TAP TO BEGIN1", two.width / 2, two.height * 2 / den, styles);
+var text = two.makeText("TAP TO BEGIN2", two.width / 2, two.height * 2 / den, styles);
 
 var correct_cnt = 0;
 var pass_cnt = 0;
